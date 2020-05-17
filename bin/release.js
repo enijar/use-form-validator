@@ -15,6 +15,7 @@ execSync(`git --git-dir ${GIT_DIR_PATH} add package.json`, {
 execSync(`git --git-dir ${GIT_DIR_PATH} commit -m "release: v${version}"`, {
   stdio: "inherit",
 });
+execSync(`git --git-dir ${GIT_DIR_PATH} push`, { stdio: "inherit" });
 
 // Create release
 execSync(`git --git-dir ${GIT_DIR_PATH} tag -a v${version} -m "${version}"`, {
