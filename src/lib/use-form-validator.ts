@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import * as React from "react";
 import { Data, Errors, Messages, Rules, Validator } from "./config/types";
 import useValidators, { formatMessage } from "./hooks/use-validators";
 
@@ -6,23 +6,26 @@ export default function useFormValidator(
   data: Data,
   rules: Rules,
   messages: Messages = {}
-) {
-  const [valid, setValid] = useState<boolean>(false);
-  const [errors, setErrors] = useState<Errors>({});
+): any {
+  const [valid, setValid] = React.useState<boolean>(false);
+  const [errors, setErrors] = React.useState<Errors>({});
   const validators = useValidators(rules);
 
-  const getValue = useCallback((value: any, defaultValue: string = ""): any => {
-    const type = typeof value;
-    if (type === "undefined") {
-      return defaultValue;
-    }
-    if (type === "string") {
-      return value.trim();
-    }
-    return value;
-  }, []);
+  const getValue = React.useCallback(
+    (value: any, defaultValue: string = ""): any => {
+      const type = typeof value;
+      if (type === "undefined") {
+        return defaultValue;
+      }
+      if (type === "string") {
+        return value.trim();
+      }
+      return value;
+    },
+    []
+  );
 
-  useEffect(() => {
+  React.useEffect(() => {
     const errors: Errors = {};
     let valid = true;
     for (const field in validators) {
@@ -65,7 +68,9 @@ export default function useFormValidator(
           if (!errors.hasOwnProperty(field)) {
             continue;
           }
-          errors[field].forEach((error) => void allErrors.push(error));
+          errors[field].forEach(
+            (error: string): void => void allErrors.push(error)
+          );
         }
         return allErrors;
       },

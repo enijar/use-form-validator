@@ -33,7 +33,7 @@ export default function Basic() {
 
   const onChange = React.useCallback(
     ({ target: { name, value } }) => {
-      setData((data) => {
+      setData((data: Data) => {
         data[name] = value;
         return data;
       });
@@ -44,12 +44,13 @@ export default function Basic() {
   return (
     <form onSubmit={onSubmit}>
       <div>
-        {/* "name" error message */}
-        <input name="name" onChange={onChange} />
+        <label htmlFor="name">name</label>
+        <input id="name" name="name" onChange={onChange} />
         {validator.errors.first("name")}
       </div>
       <div>
-        <input name="email" onChange={onChange} />
+        <label htmlFor="email">email</label>
+        <input id="email" name="email" onChange={onChange} />
         {/* "email" error message */}
         {validator.errors.first("email")}
       </div>
