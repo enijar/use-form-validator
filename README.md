@@ -20,17 +20,16 @@ function Form() {
   // data is an object of form field values, .e.g {name: "Bob", email: "bob@example.com"}
   const [data, setData] = useState({});
   const [rules] = useState({
-    firstName: "required|max:255",
-    lastName: "required|max:255",
+    name: "required|max:255",
     email: "required|max:255|email",
   });
   // Default message overrides
   const [messages] = useState({
     // Override default "required" message
     required: "This field is required",
-    // Override "firstName.required" message
-    firstName: {
-      required: "Please enter your first name",
+    // Override "name.required" message
+    name: {
+      required: "Please enter your name",
     },
   });
   const validator = useFormValidator(data, rules, messages);
@@ -52,17 +51,16 @@ import useFormValidator from "use-form-validator";
 function Form() {
   const [data, setData] = useState({});
   const [rules] = useState({
-    firstName: "required|max:255",
-    lastName: "required|max:255",
+    name: "required|max:255",
     email: "required|max:255|email",
   });
   // Default message overrides
   const [messages] = useState({
     // Override default "required" message
     required: "This field is required",
-    // Override "firstName.required" message
-    firstName: {
-      required: "Please enter your first name",
+    // Override "name.required" message
+    name: {
+      required: "Please enter your name",
     },
   });
   const validator = useFormValidator(data, rules, messages);
