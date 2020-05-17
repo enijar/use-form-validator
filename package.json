@@ -6,8 +6,8 @@
     "url": "https://github.com/Enijar/use-form-validator"
   },
   "scripts": {
-    "watch": "npx webpack-dev-server --config examples.config.js --hot --mode development",
-    "build": "npx webpack --config examples.config.js -p --mode production",
+    "watch-examples": "npx webpack-dev-server --config examples.config.js --hot --mode development",
+    "build-examples": "npx webpack --config examples.config.js -p --mode production",
     "formatter": "npx prettier@2.0.4 src/examples/src --write"
   },
   "devDependencies": {
