@@ -5,40 +5,38 @@ import { Data, Rules } from "../../lib/config/types";
 export default function Basic() {
   const [data, setData] = React.useState<Data>({});
   const [rules] = React.useState<Rules>({
-    firstName: "required|max:255",
-    lastName: "required|max:255",
+    name: "required|max:255",
     email: "required|max:255|email",
   });
   // Default message overrides
   const [messages] = React.useState({
     // Override default "required" message
     required: "This field is required",
-    // Override "firstName.required" message
-    firstName: {
-      required: "Please enter your first name",
+    // Override "name.required" message
+    name: {
+      required: "Please enter your name",
     },
   });
-  const validator = useFormValidator(data, rules, messages);
+  const { valid, errors } = useFormValidator(data, rules, messages);
 
   const onSubmit = React.useCallback(
     (event) => {
       event.preventDefault();
-      if (validator.valid) {
+      if (valid) {
         // Validated data
         console.log(data);
       }
     },
-    [validator]
+    [valid]
   );
 
   const onChange = React.useCallback(
     ({ target: { name, value } }) => {
-      setData((data: Data) => {
-        data[name] = value;
-        return data;
-      });
+      const updatedData = { ...data };
+      updatedData[name] = value;
+      setData(updatedData);
     },
-    [setData]
+    [data, setData]
   );
 
   return (
@@ -46,13 +44,12 @@ export default function Basic() {
       <div>
         <label htmlFor="name">name</label>
         <input id="name" name="name" onChange={onChange} />
-        {validator.errors.first("name")}
+        {errors.first("name")}
       </div>
       <div>
         <label htmlFor="email">email</label>
         <input id="email" name="email" onChange={onChange} />
-        {/* "email" error message */}
-        {validator.errors.first("email")}
+        {errors.first("email")}
       </div>
       <div>
         <button>submit</button>
