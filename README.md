@@ -107,12 +107,13 @@ function Form() {
 
 ### Available Rules
 
-| Rule       | Description                    |
-| ---------- | ------------------------------ |
-| required   | Test value has a value         |
-| min:length | Test value length is >= length |
-| max:length | Test value length is <= length |
-| email      | Test value email format        |
+| Rule            | Description                                     |
+| --------------- | ----------------------------------------------- |
+| required        | Test value has a value                          |
+| min:min         | Test value length or number is >= min           |
+| max:max         | Test value length or number is <= max           |
+| email           | Test value email format                         |
+| between:min,max | Test value length or number between min and max |
 
 ### Contributing
 

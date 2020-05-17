@@ -7,6 +7,7 @@ export default function Basic() {
   const [rules] = React.useState<Rules>({
     name: "required|max:255",
     email: "required|max:255|email",
+    age: "required|between:18,30",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -50,6 +51,11 @@ export default function Basic() {
         <label htmlFor="email">email</label>
         <input id="email" name="email" onChange={onChange} />
         {errors.first("email")}
+      </div>
+      <div>
+        <label htmlFor="age">age</label>
+        <input id="age" name="age" type="number" onChange={onChange} />
+        {errors.first("age")}
       </div>
       <div>
         <button>submit</button>
