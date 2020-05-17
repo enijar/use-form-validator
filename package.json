@@ -1,7 +1,7 @@
 {
   "name": "use-form-validator",
   "description": "Hook for form validation in React",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "format-lib": "npx prettier@2.0.4 src/lib --write",
     "format": "npm run format-examples && npm run format-lib",
     "prerelease": "npm run build-lib",
-    "release": "./bin/update-version.js $1 && npm publish",
+    "release": "./bin/update-version.js $1",
     "postrelease": "./bin/release.js"
   },
   "peerDependencies": {

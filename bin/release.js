@@ -5,6 +5,9 @@ const { version } = require("../package");
 
 const GIT_DIR_PATH = path.resolve(__dirname, "..", ".git");
 
+// Publish to package
+execSync(`npm --prefix ${GIT_DIR_PATH} publish`, { stdio: "inherit" });
+
 // Commit package.json change
 execSync(`git --git-dir ${GIT_DIR_PATH} add package.json`, {
   stdio: "inherit",
