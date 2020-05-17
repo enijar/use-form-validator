@@ -3,7 +3,7 @@ export type Rules = {
 };
 
 export type Messages = {
-  [key: string]: { [key: string]: string } | string;
+  [key: string]: any;
 };
 
 export type Validators = {

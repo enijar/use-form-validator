@@ -7,8 +7,8 @@ import {
   Rules,
   Validators,
   ValidatorsMap,
-} from "../types";
-import { ARG_SEP, MULTI_ARG_SEP, RULE_SEP } from "../consts";
+} from "../config/types";
+import { ARG_SEP, MULTI_ARG_SEP, RULE_SEP } from "../config/consts";
 
 const messagesMap: MessagesMap = {
   required: "The :field field is required",

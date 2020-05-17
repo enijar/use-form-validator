@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Data, Errors, Messages, Rules } from "./types";
+import { Data, Errors, Messages, Rules, Validator } from "./config/types";
 import useValidators, { formatMessage } from "./hooks/use-validators";
 
 export default function useFormValidator(
@@ -23,15 +23,15 @@ export default function useFormValidator(
   }, []);
 
   useEffect(() => {
-    const errors = {};
+    const errors: Errors = {};
     let valid = true;
     for (const field in validators) {
       if (!validators.hasOwnProperty(field)) {
         continue;
       }
-      const value = getValue(data[field]);
+      const value: any = getValue(data[field]);
       for (let i = 0, length = validators[field].length; i < length; i++) {
-        const validator = validators[field][i];
+        const validator: Validator = validators[field][i];
         const { pass, message } = validator.test(value, ...validator.args);
         if (pass) {
           continue;
@@ -60,7 +60,7 @@ export default function useFormValidator(
     valid,
     errors: {
       all() {
-        const allErrors = [];
+        const allErrors: string[] = [];
         for (const field in errors) {
           if (!errors.hasOwnProperty(field)) {
             continue;
@@ -69,10 +69,10 @@ export default function useFormValidator(
         }
         return allErrors;
       },
-      get(field) {
+      get(field: string): string[] {
         return errors[field] || [];
       },
-      first(field) {
+      first(field: string): string {
         return (errors[field] || [])[0] || null;
       },
     },
