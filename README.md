@@ -39,7 +39,6 @@ function Form() {
   // validator.errors.get(name) => array of errors for field
   // validator.errors.first(name) => first error for field or null if there is no error
 }
-
 ```
 
 **Basic Example**
@@ -108,9 +107,32 @@ function Form() {
 
 ### Available Rules
 
-| Rule | Description |
-|------|-------------|
-| required | Test value has a value |
+| Rule       | Description                    |
+| ---------- | ------------------------------ |
+| required   | Test value has a value         |
 | min:length | Test value length is >= length |
 | max:length | Test value length is <= length |
-| email | Test value email format |
+| email      | Test value email format        |
+
+### Contributing
+
+All contributions are welcome, just submit a PR with a clear explanation of your changes.
+
+Changes to the lib are made inside `src/lib` and changes to examples are made inside `src/examples`
+
+### Running Examples
+
+The following commands will serve the examples on [localhost:8081](http://localhost:8081).
+
+```bash
+npm install
+npm run watch-examples
+```
+
+### Making a Release
+
+The below script will bump the major, minor, or patch number by one and make a new NPM and Github release.
+
+```bash
+npm run release {release: ["major", "minor", "patch"]} # e.g. npm run release patch
+```
