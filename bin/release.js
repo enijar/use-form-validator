@@ -3,11 +3,18 @@ const path = require("path");
 const { execSync } = require("child_process");
 const { version } = require("../package");
 
-const BASE_PATH = path.resolve(__dirname, "..");
+const GIT_DIR_PATH = path.resolve(__dirname, "..", ".git");
 
 // Commit package.json change
-execSync(`git -c ${BASE_PATH} add package.json`, { stdio: "inherit" });
+execSync(`git --git-dir ${GIT_DIR_PATH} add package.json`, {
+  stdio: "inherit",
+});
+execSync(`git --git-dir ${GIT_DIR_PATH} commit -m "release: v${version}"`, {
+  stdio: "inherit",
+});
 
 // Create release
-execSync(`git -c ${BASE_PATH} tag -a v${version} "${version}"`, { stdio: "inherit" });
-execSync(`git -c ${BASE_PATH} push --tags`, { stdio: "inherit" });
+execSync(`git --git-dir ${GIT_DIR_PATH} tag -a v${version} -m "${version}"`, {
+  stdio: "inherit",
+});
+execSync(`git --git-dir ${GIT_DIR_PATH} push --tags`, { stdio: "inherit" });
