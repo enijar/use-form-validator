@@ -1,58 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Args,
-  Message,
-  MessagesMap,
-  Rule,
-  Rules,
-  Validators,
-  ValidatorsMap,
-} from "../config/types";
+import { Args, Message, Rules, Validators } from "../config/types";
 import { ARG_SEP, MULTI_ARG_SEP, RULE_SEP } from "../config/consts";
-
-const messagesMap: MessagesMap = {
-  required: "The :field field is required",
-  min: "The :field field must have a min of :length characters",
-  max: "The :field field must have a max of :length characters",
-  email: "The :field field is not a valid email",
-};
-
-const validatorsMap: ValidatorsMap = {
-  required(value: any): Rule {
-    return {
-      pass: value.length > 0,
-      message(field: string): Message {
-        return formatMessage(messagesMap.required, { field });
-      },
-    };
-  },
-  min(value: any, length: number): Rule {
-    return {
-      pass: value.length >= length,
-      message(field: string): Message {
-        return formatMessage(messagesMap.min, { field, length });
-      },
-    };
-  },
-  max(value: any, length: number): Rule {
-    return {
-      pass: value.length <= length,
-      message(field: string): Message {
-        return formatMessage(messagesMap.max, { field, length });
-      },
-    };
-  },
-  email(value: any): Rule {
-    return {
-      pass: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
-        value
-      ),
-      message(field: string): Message {
-        return formatMessage(messagesMap.email, { field });
-      },
-    };
-  },
-};
+import validatorsMap from "../config/validatorsMap";
 
 export function formatMessage(message: Message, args: Args = {}): Message {
   let formattedMessage = message;
