@@ -15,7 +15,10 @@
     "format-examples": "npx prettier@2.0.4 src/examples --write",
     "format-lib": "npx prettier@2.0.4 src/lib --write",
     "format": "npm run format-examples && npm run format-lib",
-    "prepublishOnly": "npm run build-lib"
+    "prepublish": "npm run build-lib",
+    "publish": "./bin/update-version.js $1 && npm publish",
+    "postpublish": "npm run release",
+    "release": "./bin/release.js"
   },
   "peerDependencies": {
     "react": "^16.13"
