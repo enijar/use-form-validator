@@ -2,14 +2,14 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const SRC_PATH = path.resolve(__dirname, "src", "examples");
+const SRC_PATH = path.resolve(__dirname, "..", "src", "examples");
 
 module.exports = {
   stats: "minimal",
   target: "web",
   entry: path.join(SRC_PATH, "index.tsx"),
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "..", "build"),
     filename: "index.js",
   },
   devtool: "source-map",

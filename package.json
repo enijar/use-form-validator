@@ -6,9 +6,17 @@
     "url": "https://github.com/Enijar/use-form-validator"
   },
   "scripts": {
-    "watch-examples": "npx webpack-dev-server --config examples.config.js --hot --mode development",
-    "build-examples": "npx webpack --config examples.config.js -p --mode production",
-    "formatter": "npx prettier@2.0.4 src/examples/src --write"
+    "watch-examples": "npx webpack-dev-server --config config/examples.config.js --hot --mode development",
+    "build-examples": "npx webpack --config config/examples.config.js -p --mode production",
+    "watch-lib": "npx webpack-dev-server --config config/lib.config.js --hot --mode development",
+    "build-lib": "npx webpack --config config/lib.config.js -p --mode production",
+    "format-examples": "npx prettier@2.0.4 src/examples --write",
+    "format-lib": "npx prettier@2.0.4 src/lib --write",
+    "format": "npm run format-examples && npm run format-lib",
+    "prepublishOnly": "npm run build-lib"
+  },
+  "peerDependencies": {
+    "react": "^16.13"
   },
   "devDependencies": {
     "react": "^16.13.1",
