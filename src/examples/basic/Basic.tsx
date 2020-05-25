@@ -8,6 +8,7 @@ export default function Basic() {
     name: "required|max:255",
     email: "required|max:255|email",
     age: "required|between:18,30",
+    uuid: 'required|uuid'
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -56,6 +57,11 @@ export default function Basic() {
         <label htmlFor="age">age</label>
         <input id="age" name="age" type="number" onChange={onChange} />
         {errors.first("age")}
+      </div>
+      <div>
+        <label htmlFor="uuid">uuid</label>
+        <input id="uuid" name="uuid" type="text" onChange={onChange} />
+        {errors.first("uuid")}
       </div>
       <div>
         <button>submit</button>

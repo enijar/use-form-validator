@@ -6,6 +6,7 @@ const messagesMap: MessagesMap = {
   max: "The :field field must have a max of :max characters",
   between: "The :field field be between :min and :max characters",
   email: "The :field field is not a valid email",
+  uuid: "The :field field is not a valid uuid",
 };
 
 export default messagesMap;
