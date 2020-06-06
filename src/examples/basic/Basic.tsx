@@ -10,7 +10,7 @@ export default function Basic() {
     age: "required|between:18,30",
     uuid: 'required|uuid',
     aboutYou: "required_if:name,John,email,email@john.com",
-    surename: "required_with:name,age",
+    surname: "required_with:name,age",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -23,7 +23,7 @@ export default function Basic() {
     aboutYou: {
       required_if: "Tell more about you."
     },
-    surename: {
+    surname: {
       required_with: "This fhield is required"
     },
   });
@@ -77,9 +77,9 @@ export default function Basic() {
         {errors.first("aboutYou")}
       </div>
       <div>
-        <label htmlFor="surename">Surename</label>
-        <input id="surename" name="surename" type="text" onChange={onChange} />
-        {errors.first("surename")}
+        <label htmlFor="surname">Surename</label>
+        <input id="surname" name="surname" type="text" onChange={onChange} />
+        {errors.first("surname")}
       </div>
       <div>
         <button type="submit">submit</button>
