@@ -9,7 +9,8 @@ export default function Basic() {
     email: "required|max:255|email",
     age: "required|between:18,30",
     uuid: 'required|uuid',
-    requiredIf: "required_if:name,John,email,email@john.com",
+    aboutYou: "required_if:name,John,email,email@john.com",
+    surename: "required_with:name,age",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -19,9 +20,12 @@ export default function Basic() {
     name: {
       required: "Please enter your name",
     },
-    requiredIf: {
-      required_if: 'Tell more about you.'
-    }
+    aboutYou: {
+      required_if: "Tell more about you."
+    },
+    surename: {
+      required_with: "This fhield is required"
+    },
   });
   const { valid, errors } = useFormValidator(data, rules, messages);
 
@@ -68,9 +72,14 @@ export default function Basic() {
         {errors.first("uuid")}
       </div>
       <div>
-        <label htmlFor="drivingLicense">Required if name: John && email: email@john.com</label>
-        <input id="requiredIf" name="requiredIf" type="text" onChange={onChange} />
-        {errors.first("requiredIf")}
+        <label htmlFor="aboutYou">About you</label>
+        <input id="aboutYou" name="aboutYou" type="text" onChange={onChange} />
+        {errors.first("aboutYou")}
+      </div>
+      <div>
+        <label htmlFor="surename">Surename</label>
+        <input id="surename" name="surename" type="text" onChange={onChange} />
+        {errors.first("surename")}
       </div>
       <div>
         <button type="submit">submit</button>

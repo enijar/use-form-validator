@@ -78,7 +78,7 @@ const validatorsMap: ValidatorsMap = {
     }
 
     return {
-      pass: (params:any, values:any) => {
+      pass(params:any, values:any) {
         let valid = true;
         let shouldValidate = false;
         args.forEach((rule:any, index:any) => {
@@ -97,6 +97,24 @@ const validatorsMap: ValidatorsMap = {
       },
       message(field: string): Message {
         return formatMessage(messagesMap.required_if, {field});
+      }
+    }
+  },
+  required_with(value:any): Rule {
+    const args = this.args;
+    return {
+      pass(params: any, values:any) {
+        let valid = true;
+        args.forEach((rule:any, index:any) => {
+          if(values.hasOwnProperty(rule) && values[rule] !== '') {
+            valid = validatorsMap.required(value).pass;
+          }
+        });
+
+        return valid;
+      },
+      message(field: string): Message {
+        return formatMessage(messagesMap.required_with, {field});
       }
     }
   }
