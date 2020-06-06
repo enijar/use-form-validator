@@ -9,7 +9,7 @@ export default function Basic() {
     email: "required|max:255|email",
     age: "required|between:18,30",
     uuid: 'required|uuid',
-    drivingLicense: "required_if:age,18,email,dorultanianos@gmail.com"
+    requiredIf: "required_if:name,John,email,email@john.com",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -19,9 +19,9 @@ export default function Basic() {
     name: {
       required: "Please enter your name",
     },
-    drivingLicense: {
-      required_if: "You should provide a driving license if you're over 18"
-    }
+    // requiredIf: {
+    //   required_if: 'Tell more about you.'
+    // }
   });
   const { valid, errors } = useFormValidator(data, rules, messages);
 
@@ -68,9 +68,9 @@ export default function Basic() {
         {errors.first("uuid")}
       </div>
       <div>
-        <label htmlFor="drivingLicense">drivingLicense</label>
-        <input id="drivingLicense" name="drivingLicense" type="text" onChange={onChange} />
-        {errors.first("drivingLicense")}
+        <label htmlFor="drivingLicense">Required if name: John && email: email@john.com</label>
+        <input id="requiredIf" name="requiredIf" type="text" onChange={onChange} />
+        {errors.first("requiredIf")}
       </div>
       <div>
         <button>submit</button>
@@ -78,4 +78,3 @@ export default function Basic() {
     </form>
   );
 }
-

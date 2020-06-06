@@ -76,11 +76,19 @@ const validatorsMap: ValidatorsMap = {
     return {
       pass: (params:any, values:any) => {
         let valid = true;
-        args.forEach((i:any, index:any) => {
-          if(values.hasOwnProperty(i) && values[i] === args[index + 1]) {
-            valid = validatorsMap.required(value).pass;
+        let shouldValidate = false;
+        args.forEach((rule:any, index:any) => {
+          if(values.hasOwnProperty(rule)) {
+            if(values[rule] === args[index + 1]) {
+              shouldValidate = true;
+            } else {
+              shouldValidate = false;
+            }
           }
-        })
+        });
+        if(shouldValidate) {
+          valid = validatorsMap.required(value).pass;
+        }
         return valid;
       },
       message(field: string): Message {

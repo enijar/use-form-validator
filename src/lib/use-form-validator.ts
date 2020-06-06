@@ -49,9 +49,6 @@ export default function useFormValidator(
         } else if(pass) {
           continue;
         }
-        // if (pass || (typeof pass === 'function' && pass(validators, values))) {
-        //   continue;
-        // }
         valid = false;
         if (!errors.hasOwnProperty(field)) {
           errors[field] = [];

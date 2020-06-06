@@ -7,7 +7,7 @@ const messagesMap: MessagesMap = {
   between: "The :field field be between :min and :max characters",
   email: "The :field field is not a valid email",
   uuid: "The :field field is not a valid uuid",
-  required_if: 'required if message'
+  required_if: 'The :field field is required',
 };
 
 export default messagesMap;
