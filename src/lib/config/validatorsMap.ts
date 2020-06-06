@@ -70,6 +70,23 @@ const validatorsMap: ValidatorsMap = {
         return formatMessage(messagesMap.uuid, {field})
       }
     }
+  },
+  required_if(value:any): Rule {
+    const args = this.args;
+    return {
+      pass: (params:any, values:any) => {
+        let valid = true;
+        args.forEach((i:any, index:any) => {
+          if(values.hasOwnProperty(i) && values[i] === args[index + 1]) {
+            valid = validatorsMap.required(value).pass;
+          }
+        })
+        return valid;
+      },
+      message(field: string): Message {
+        return formatMessage(messagesMap.required_if, {field});
+      }
+    }
   }
 };
 
