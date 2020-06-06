@@ -19,9 +19,9 @@ export default function Basic() {
     name: {
       required: "Please enter your name",
     },
-    // requiredIf: {
-    //   required_if: 'Tell more about you.'
-    // }
+    requiredIf: {
+      required_if: 'Tell more about you.'
+    }
   });
   const { valid, errors } = useFormValidator(data, rules, messages);
 
@@ -73,7 +73,7 @@ export default function Basic() {
         {errors.first("requiredIf")}
       </div>
       <div>
-        <button>submit</button>
+        <button type="submit">submit</button>
       </div>
     </form>
   );

@@ -73,6 +73,10 @@ const validatorsMap: ValidatorsMap = {
   },
   required_if(value:any): Rule {
     const args = this.args;
+    if(args.length % 2 !== 0) {
+      throw new Error(`required_if rule requires a pair of field,value but received instead non-pair params ${args.map((item:any) => item)}.`);
+    }
+
     return {
       pass: (params:any, values:any) => {
         let valid = true;
