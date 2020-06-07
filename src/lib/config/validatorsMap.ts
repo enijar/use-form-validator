@@ -117,6 +117,31 @@ const validatorsMap: ValidatorsMap = {
         return formatMessage(messagesMap.required_with, {field});
       }
     }
+  },
+  required_unless(value:any): Rule {
+    const args = this.args;
+    return {
+      pass(params: any, values:any) {
+        let valid = validatorsMap.required(value).pass;
+        let shouldValidate = false;
+        args.forEach((rule:any, index:any) => {
+          if(values.hasOwnProperty(rule)) {
+            if(values[rule] === args[index + 1]) {
+              shouldValidate = true;
+            } else {
+              shouldValidate = false;
+            }
+          }
+        });
+        if(shouldValidate) {
+          valid = true;
+        }
+        return valid;
+      },
+      message(field: string): Message {
+        return formatMessage(messagesMap.required_unless, {field});
+      }
+    }
   }
 };
 

@@ -9,6 +9,7 @@ const messagesMap: MessagesMap = {
   uuid: "The :field field is not a valid uuid",
   required_if: 'The :field field is required',
   required_with: "The :field field is required",
+  required_unless: "The :field field is required",
 };
 
 export default messagesMap;
