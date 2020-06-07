@@ -142,6 +142,29 @@ const validatorsMap: ValidatorsMap = {
         return formatMessage(messagesMap.required_unless, {field});
       }
     }
+  },
+  required_with_all(value:any): Rule {
+    const args = this.args;
+    return {
+      pass(params:any, values:any) {
+        let valid = true;
+        let shouldValidate;
+        args.forEach((rule:any) => {
+          if(values.hasOwnProperty(rule) && values[rule] !== '') {
+            shouldValidate = true;
+          } else {
+            shouldValidate = false;
+          }
+        });
+        if(shouldValidate) {
+          valid = validatorsMap.required(value).pass;
+        }
+        return valid;
+      },
+      message(field: string): Message {
+        return formatMessage(messagesMap.required_with_all, {field});
+      }
+    }
   }
 };
 

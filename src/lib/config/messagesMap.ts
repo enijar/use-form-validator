@@ -10,6 +10,7 @@ const messagesMap: MessagesMap = {
   required_if: 'The :field field is required',
   required_with: "The :field field is required",
   required_unless: "The :field field is required",
+  required_with_all: "the :field field is required",
 };
 
 export default messagesMap;

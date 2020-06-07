@@ -11,6 +11,7 @@ export default function Basic() {
     uuid: 'required|uuid',
     aboutYou: "required_if:name,John,email,email@john.com",
     surname: "required_unless:name,John,email,email@john.com",
+    job: "required_with_all:name,email,age",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -80,6 +81,11 @@ export default function Basic() {
         <label htmlFor="surname">Surname</label>
         <input id="surname" name="surname" type="text" onChange={onChange} />
         {errors.first("surname")}
+      </div>
+      <div>
+        <label htmlFor="job">Job</label>
+        <input id="job" name="job" type="text" onChange={onChange} />
+        {errors.first("job")}
       </div>
       <div>
         <button type="submit">submit</button>
