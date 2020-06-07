@@ -11,7 +11,7 @@ export default function Basic() {
     uuid: 'required|uuid',
     aboutYou: "required_if:name,John,email,email@john.com",
     surname: "required_unless:name,John,email,email@john.com",
-    job: "required_with_all:name,email,age",
+    job: "required_without_all:name,email,age",
   });
   // Default message overrides
   const [messages] = React.useState({
