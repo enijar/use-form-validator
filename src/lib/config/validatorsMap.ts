@@ -76,7 +76,6 @@ const validatorsMap: ValidatorsMap = {
     if(args.length % 2 !== 0) {
       throw new Error(`required_if rule requires a pair of field,value but received instead non-pair params ${args.map((item:any) => item)}.`);
     }
-
     return {
       pass(params:any, values:any) {
         let valid = true;
@@ -110,11 +109,27 @@ const validatorsMap: ValidatorsMap = {
             valid = validatorsMap.required(value).pass;
           }
         });
-
         return valid;
       },
       message(field: string): Message {
         return formatMessage(messagesMap.required_with, {field});
+      }
+    }
+  },
+  required_without(value:any): Rule {
+    const args = this.args;
+    return {
+      pass(params: any, values:any) {
+        let valid = validatorsMap.required(value).pass;
+        args.forEach((rule:any, index:any) => {
+          if(values.hasOwnProperty(rule) && values[rule] !== '') {
+            valid = true;
+          }
+        });
+        return valid;
+      },
+      message(field: string): Message {
+        return formatMessage(messagesMap.required_without, {field});
       }
     }
   },
