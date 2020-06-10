@@ -8,6 +8,10 @@ export default function Basic() {
     name: "required|max:255",
     email: "required|max:255|email",
     age: "required|between:18,30",
+    uuid: 'required|uuid',
+    aboutYou: "required_if:name,John,email,email@john.com",
+    surname: "required_unless:name,John,email,email@john.com",
+    job: "required_without:name,email,age",
   });
   // Default message overrides
   const [messages] = React.useState({
@@ -16,6 +20,12 @@ export default function Basic() {
     // Override "name.required" message
     name: {
       required: "Please enter your name",
+    },
+    aboutYou: {
+      required_if: "Tell more about you."
+    },
+    surname: {
+      required_unless: "This field is required"
     },
   });
   const { valid, errors } = useFormValidator(data, rules, messages);
@@ -58,7 +68,27 @@ export default function Basic() {
         {errors.first("age")}
       </div>
       <div>
-        <button>submit</button>
+        <label htmlFor="uuid">uuid</label>
+        <input id="uuid" name="uuid" type="text" onChange={onChange} />
+        {errors.first("uuid")}
+      </div>
+      <div>
+        <label htmlFor="aboutYou">About you</label>
+        <input id="aboutYou" name="aboutYou" type="text" onChange={onChange} />
+        {errors.first("aboutYou")}
+      </div>
+      <div>
+        <label htmlFor="surname">Surname</label>
+        <input id="surname" name="surname" type="text" onChange={onChange} />
+        {errors.first("surname")}
+      </div>
+      <div>
+        <label htmlFor="job">Job</label>
+        <input id="job" name="job" type="text" onChange={onChange} />
+        {errors.first("job")}
+      </div>
+      <div>
+        <button type="submit">submit</button>
       </div>
     </form>
   );

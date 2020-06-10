@@ -27,16 +27,26 @@ export default function useFormValidator(
 
   React.useEffect(() => {
     const errors: Errors = {};
+    const values: Data = {};
     let valid = true;
     for (const field in validators) {
       if (!validators.hasOwnProperty(field)) {
         continue;
       }
       const value: any = getValue(data[field]);
+      if(values[field] !== value) {
+        values[field] = value;
+      }
       for (let i = 0, length = validators[field].length; i < length; i++) {
         const validator: Validator = validators[field][i];
         const { pass, message } = validator.test(value, ...validator.args);
-        if (pass) {
+
+        if(typeof pass === 'function') {
+
+          if(pass(validator, values)) {
+            continue;
+          }
+        } else if(pass) {
           continue;
         }
         valid = false;
